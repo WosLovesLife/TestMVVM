@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.wosloveslife.testmvvm.User"/>
+
+        <import type="com.wosloveslife.testmvvm.MyStringUtils"/>
+
+        <import type="com.wosloveslife.testmvvm.ObservableUser"/>
+
+        <variable
+            name="user"
+            type="User"/>
+
+        <variable
+            name="coalescing"
+            type="User"/>
+
+        <variable
+            name="largePadding"
+            type="boolean"/>
+
+        <variable
+            name="observable"
+            type="ObservableUser"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@{largePadding ? @dimen/large : @dimen/small}">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.lastName + user.firstName}"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{MyStringUtils.capitalize(user.lastName)}"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{coalescing.lastName??coalescing.firstName}"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorAccent"/>
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:hint="自动改变first部分"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/edit_last_text"
+            android:layout_width="match_parent"
+            android:hint="自动改变last部分"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{observable.firstName + observable.lastName}"
+            android:textSize="16sp"/>
+    </LinearLayout>
+</layout>
